@@ -40,33 +40,18 @@
 
 			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
 				<h4 class="s-text12 p-b-30">
-					Links
+					Blog
 				</h4>
 
 				<ul>
+                                    <?php foreach($blogCategories as $blogItem):?>
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Search
+						<a href="/blog/<?php echo $blogItem['id'];?>" class="s-text7">
+							<?php echo $blogItem['name'];?>
 						</a>
 					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							About Us
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Contact Us
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
-						</a>
-					</li>
+                                    <?php endforeach;?>    
+					
 				</ul>
 			</div>
 
@@ -78,24 +63,24 @@
 				<ul>
 					<li class="p-b-9">
 						<a href="#" class="s-text7">
-							Track Order
+							About us
 						</a>
 					</li>
 
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
+						<a href="/contact" class="s-text7">
+							Contact us
 						</a>
 					</li>
 
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
+						<a href="/shipping" class="s-text7">
 							Shipping
 						</a>
 					</li>
 
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
+						<a href="/faqs" class="s-text7">
 							FAQs
 						</a>
 					</li>
@@ -107,7 +92,7 @@
 					Newsletter
 				</h4>
 
-				<form>
+                            <form method="post" action="#">
 					<div class="effect1 w-size9">
 						<input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@example.com">
 						<span class="effect1-line"></span>
@@ -115,9 +100,9 @@
 
 					<div class="w-size2 p-t-20">
 						<!-- Button -->
-						<button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
-							Subscribe
-						</button>
+                                                <input type="submit" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4"  name="Subscribe" value="Subscribe">
+							
+					
 					</div>
 
 				</form>
@@ -175,21 +160,21 @@
 	<script type="text/javascript" src="/template/vendor/sweetalert/sweetalert.min.js"></script>
 	<script type="text/javascript">
 		$('.block2-btn-addcart').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+			var nameProduct = $(this).parent().parent().parent().parent().find('.block2-name').text();
 			$(this).on('click', function(){
 				swal(nameProduct, "is added to cart !", "success");
 			});
 		});
 
 		$('.block2-btn-addwishlist').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+			var nameProduct = $(this).parent().parent().parent().find('.block2-name').text();
 			$(this).on('click', function(){
 				swal(nameProduct, "is added to wishlist !", "success");
 			});
 		});
 
 		$('.btn-addcart-product-detail').each(function(){
-			var nameProduct = $('.product-detail-name').html();
+			var nameProduct = $('.product-detail-name').text();
 			$(this).on('click', function(){
 				swal(nameProduct, "is added to wishlist !", "success");
 			});
@@ -222,13 +207,23 @@
             });
                   
         </script>
+  
         <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+<script>  $(".js-range-slider").ionRangeSlider({
+        type: "double",
+        skin: "round",
+        grid: false
+    });
+    </script>
+
 <!--===============================================================================================-->
 	<script src="/template/js/main.js"></script>
 
 </body>
+
 </html>

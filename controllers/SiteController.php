@@ -19,33 +19,22 @@
 class SiteController {
 
     public function actionIndex() {
-        $instagramPhotos=array();
-        $instagramPhotos= instagram::Last5PhotosFromInst();
-        $authors=array();
-        $authors= BlogArticles::getAuthorName();
-        $articles=array();
+        User::SaveEmail();
+           $username= User::getUserName();
+        $sales= Product::getSalesList(2);
+         $productsCart=Cart::ProductsinCart();
+ $totall=Cart::total();
         $articles= BlogArticles::getOurBlogArticles();
-        $products=array();
         $products= Product::getRecomendedProductsList();
-        $promotions=array();
         $promotions= Product::getPromotionsList();
-        $categories=array();
         $categories=Category::getCategoriesList();
-        $blogCategories=array();
         $blogCategories=BlogArticles::getBlogCategoriesList();
+        $instagramPhotos= instagram::Last5PhotosFromInst();
+
+
         require_once(ROOT . '/views/site/index.php');
         return true;
         
     }
-     public function actionContact() {
-        $to= 'dimaderepa1997@gmail.com';
-$subject = 'the subject';
-$message = 'hello';
-
-$result= mail($to, $subject, $message);
-        var_dump($result);
-        die;
-    
-        
-    }
+     
 }

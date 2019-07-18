@@ -5,11 +5,11 @@
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
 
-		<a href="/blog/" class="s-text16">
+		<a href="/blog/all" class="s-text16">
 			Blog
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
-                <a href="/blog/category/<?php echo $article['category_id']?>" class="s-text16">
+                <a href="/blog/<?php echo $article['category_id']?>" class="s-text16">
 			<?php echo $blogCategories[$article['category_id']-1]['name'];?>
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
@@ -27,7 +27,7 @@
 					<div class="p-r-50 p-r-0-lg">
 						<div class="p-b-40">
 							<div class="blog-detail-img wrap-pic-w">
-								<img src="/template/images/articles/<?php echo $article['id']?>/1.jpg" alt="IMG-BLOG">
+								<img src="/template/images/articles/<?php echo $article['id']?>.jpg" alt="IMG-BLOG">
 							</div>
 
 							<div class="blog-detail-txt p-t-33">
@@ -37,7 +37,7 @@
 
 								<div class="s-text8 flex-w flex-m p-b-21">
 									<span>
-										<?php echo $authors[$article['author_id']-1]['nickname'];?>
+										<?php echo $authors[$article['author_id']];?>
 										<span class="m-l-3 m-r-6">|</span>
 									</span>
 
@@ -55,48 +55,58 @@
 									</span>
 
 									<span>
-										<?php echo $comments[$article['category_id']-1]['COUNT(*)'];?> 
-                                                                            Comment<?php if($comments[$article['category_id']-1]['COUNT(*)']==1){}else{echo 's';}?>
+										         <?php if(isset($comments[$article['id']])){echo $comments[$article['id']].' Comments';}else{echo '0  Comments';}?> 
 									</span>
 								</div>
 
 								<div class="p-b-25 blog_detail">
-                                                                    <?php
-                                                                      
-                                                                    ?>
+                                                                    <?php echo $article['text'];?>
 								</div>
 							</div>
 
 							
 						</div>
-
+                                            <h1 class="m-b-20">COMMENTS</h1>
+                                            <?php foreach($commentInfo as $value):?>
+                                            <div class="comment_wrapper m-b-20">
+                                                <span class="comment_info m-l-8"><?php if(isset($_SESSION['user']) && $value['author_id']==$_SESSION['user']){
+                                                    echo '<form method="post"><input class="delete_comment" type="submit" name="delete_comment" value="Delete comment"><input type="hidden" name="id" value="'.$value['id'].'"></form>';
+                                                    
+                                                }?></span>
+                                                <span class="comment_title"><?php echo $value['title'];?></span>
+                                                <p class="comment_text"><?php echo $value['text'];?></p>
+                                                <div class=" comment_info">
+                                                <span class="comment_date"><?php echo $value['date'];?></span>
+                                                 <span class="comment_author m-l-8">by <?php echo $authors[$value['author_id']];?></span>
+                                                </div>
+                                            </div>
+                                            <?php endforeach;?>
+                                            <?php if($username!=NULL): ?>
 						<!-- Leave a comment -->
-						<form class="leave-comment">
+                                                <form method="post" >
 							<h4 class="m-text25 p-b-14">
 								Leave a Comment
 							</h4>
 
+							<div class="bo12 of-hidden   m-b-20 w-full">
+								<input class="sizefull s-text7 p-b-18 p-t-18 p-l-18 p-r-18" type="text" name="comment_title" placeholder="Title">
+							</div>
+
+							<textarea class="dis-block s-text7 size18 bo12 p-l-18 p-r-18 p-t-13 m-b-20" name="comment_text" placeholder="Comment..."></textarea>
+
 							
-
-							<textarea class="dis-block s-text7 size18 bo12 p-l-18 p-r-18 p-t-13 m-b-20" name="comment" placeholder="Comment..."></textarea>
-
-							<div class="bo12 of-hidden size19 m-b-20">
-								<input class="sizefull s-text7 p-l-18 p-r-18" type="text" name="name" placeholder="Name">
-							</div>
-
-							<div class="bo12 of-hidden size19 m-b-20">
-								<input class="sizefull s-text7 p-l-18 p-r-18" type="text" name="email" placeholder="Email">
-							</div>
 
 						
 
 							<div class="w-size24">
 								<!-- Button -->
-								<button class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-									Post Comment
-								</button>
+                                                                <input type="submit" name="submit_comment" value="Post Comment" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									
 							</div>
 						</form>
+                                                <?php else:?>
+                                                <a  href="/user/login"><b>LOGIN</b></a> for leave your comment.
+                                                <?php endif;?>
 					</div>
 				</div>
 
@@ -161,4 +171,5 @@
 			</div>
 		</div>
 	</section>
+        
 <?php include(ROOT . '/views/layouts/footer.php');?>

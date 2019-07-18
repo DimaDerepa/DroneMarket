@@ -15,6 +15,15 @@
 
 class ProductController {
     public function actionView($id) {
+         Comments::deleteComment();
+        Comments::saveCommentProduct($id);
+        $authors=array();
+        $authors= BlogArticles::getAuthorName();
+        $commentsInfo= Comments::getProductComments($id);
+         $username= User::getUserName();
+         User::SaveEmail();
+         $productsCart=Cart::ProductsinCart();
+ $totall=Cart::total();
         $categories=array();
         $categories=Category::getCategoriesList();
         $product=array();
@@ -24,7 +33,7 @@ class ProductController {
         $blogCategories=array();
         $blogCategories= BlogArticles::getBlogCategoriesList();
         require_once(ROOT . '/views/product/view.php');
-      
+
         return true;
         
     }

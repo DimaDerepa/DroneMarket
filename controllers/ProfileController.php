@@ -13,14 +13,25 @@
  */
 class ProfileController {
     public function actionIndex() {
+        Comments::deleteComment();
+        $mycomments=Comments::getCommentId();
+         $authors= BlogArticles::getAuthorName();
+        Configurations::proposeNewArticle();
+         $prodAll= Product::getProductsVse();
+        $orders= Configurations::getUsersOrders();
+        $myArticles= BlogArticles::getUsersArticles();
+        $productsCart=Cart::ProductsinCart();
+ $totall=Cart::total();
         $userId= User::checkLogged();
-        echo $userId;
-          
+      
+           $username= User::getUserName();
+           User::SaveEmail();
         $categories=array();
         $categories=Category::getCategoriesList();
         $blogCategories=array();
         $blogCategories=BlogArticles::getBlogCategoriesList();
         require_once(ROOT . '/views/profile/index.php');
+  
         return true;
     }
 }

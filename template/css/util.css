@@ -2351,7 +2351,7 @@
 
 
 
-/*[ Wrap Picture ]
+/*[ flp Picture ]
 -----------------------------------------------------------
 */
 .wrap-pic-w img {width: 100%;}
@@ -2871,7 +2871,17 @@
 	-ms-align-items: flex-start;
 	align-items: flex-start;
 }
-
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px){
+    .sobaka{
+        flex-direction:column !IMPORTANT;
+        align-items:center !IMPORTANT;
+        justify-content: center !important;
+        
+    }
+    .sobaka div img{
+        width:100%;
+    }
+}
 .flex-col-rev-r {
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -3028,6 +3038,12 @@ TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 	color: #111111;
 	text-transform: uppercase;
 }
+.s-text222 {
+	font-family: Montserrat-Regular;
+	font-size: 7.5px;
+	color: #111111;
+	text-transform: uppercase;
+}
 
 .s-text3 {
 	font-family: Montserrat-Regular;
@@ -3176,6 +3192,13 @@ TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 /*[ M-Text 16 - 30 ]
 ///////////////////////////////////////////////////////////
 */
+.m-textJJJJ {
+	font-family: Montserrat-Regular;
+	font-size: 9px;
+	color: white;
+	line-height: 0.75;
+	letter-spacing: 1px;
+}
 .m-text1 {
 	font-family: Montserrat-Regular;
 	font-size: 18px;
@@ -3235,7 +3258,13 @@ TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 	color: #e65540;
 	text-transform: uppercase;
 }
+.m-text1489{
+    font-family: Montserrat-Bold;
+	font-size: 16px;
+	color: #cccccc  ;
 
+
+}
 .m-text9 {
 	font-family: Montserrat-Bold;
 	font-size: 30px;
@@ -3404,6 +3433,14 @@ TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 	letter-spacing: 3px;
 	text-transform: uppercase;
 }
+.xl-text145{
+	font-family: Poppins-Bold;
+	font-size: 30px;
+	color: white;
+	line-height: 0.6;
+	letter-spacing: 1.5sipx;
+	text-transform: uppercase;
+}
 
 .xl-text2 {
 	font-family: Poppins-Black;
@@ -3462,7 +3499,10 @@ SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE
 	width: 100%;
 	height: 46px;
 }
-
+.size222 {
+	width: 50%;
+	height: 23px;
+}
 .size3 {
 	width: 60px;
 	height: 60px;

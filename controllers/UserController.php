@@ -1,7 +1,9 @@
 <?php
 class UserController {
    public function actionRegistration() {
-       
+       $productsCart=Cart::ProductsinCart();
+ $totall=Cart::total();
+        User::SaveEmail();
         $username='';
         $email='';
         $password='';
@@ -43,6 +45,7 @@ class UserController {
        
         $categories=array();
         $categories=Category::getCategoriesList();
+     
         $blogCategories=array();
         $blogCategories=BlogArticles::getBlogCategoriesList();
         require_once(ROOT . '/views/user/registration.php');
@@ -50,7 +53,9 @@ class UserController {
         
     }
      public function actionLogin() {
-       
+         $productsCart=Cart::ProductsinCart();
+ $totall=Cart::total();
+        User::SaveEmail();
        $username='';
        $password='';
        
@@ -76,7 +81,7 @@ class UserController {
        }
        
        
-       
+        $username= User::getUserName();
         $categories=array();
         $categories=Category::getCategoriesList();
         $blogCategories=array();
@@ -86,9 +91,10 @@ class UserController {
         
     }
     public function actionLogout() {
-        session_start();
+        
+
         unset($_SESSION['user']);
-        header("Location: /user/login");
+        header("Location: /");
         
     }
      

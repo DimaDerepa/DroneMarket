@@ -37,8 +37,10 @@
 					<!-- block1 -->
                                          
 					<div class="block1 hov-img-zoom pos-relative m-b-30">
-                                            <img src="/template/images/categories/<?php echo $categories[0]['id'];?>.jpg" alt="IMG-BENNER">
-
+                                            <picture>
+                                                <source type="image/jpg" srcset="/template/images/categories/<?php echo $categories[0]['id'];?>.jpg"  >
+                                                <img type="image/webp" src="/template/images/categories/<?php echo $categories[0]['id'];?>.webp"  alt="IMG-BENNER">
+                                            </picture>
 						<div class="block1-wrapbtn w-size2">
 							<!-- Button -->
 							<a href="/category/<?php echo $categories[0]['id'];?>" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4 but1avt">
@@ -49,8 +51,11 @@
                                   
 					<!-- block1 -->
 					<div class="block1 hov-img-zoom pos-relative m-b-30">
-						<img src="/template/images/categories/<?php echo $categories[1]['id'];?>.jpg" alt="IMG-BENNER">
-
+						
+                                            <picture>
+                                                <source type="image/jpg" srcset="/template/images/categories/<?php echo $categories[1]['id'];?>.jpg"  >
+                                                <img type="image/webp" src="/template/images/categories/<?php echo $categories[1]['id'];?>.webp"  alt="IMG-BENNER">
+                                            </picture>
 						<div class="block1-wrapbtn w-size2">
 							<!-- Button -->
 							<a href="/category/<?php echo $categories[1]['id'];?>" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
@@ -63,7 +68,11 @@
 				<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
 					<!-- block1 -->
 					<div class="block1 hov-img-zoom pos-relative m-b-30">
-						<img src="/template/images/categories/<?php echo $categories[2]['id'];?>.jpg" alt="IMG-BENNER">
+					
+                                            <picture>
+                                                <source type="image/jpg" srcset="/template/images/categories/<?php echo $categories[2]['id'];?>.jpg"  >
+                                                <img type="image/webp" src="/template/images/categories/<?php echo $categories[2]['id'];?>.webp"  alt="IMG-BENNER">
+                                            </picture>
 
 						<div class="block1-wrapbtn w-size2">
 							<!-- Button -->
@@ -75,8 +84,11 @@
 
 					<!-- block1 -->
 					<div class="block1 hov-img-zoom pos-relative m-b-30">
-						<img src="/template/images/categories/<?php echo $categories[3]['id'];?>.jpg" alt="IMG-BENNER">
-
+						
+                                            <picture>
+                                                <source type="image/jpg" srcset="/template/images/categories/<?php echo $categories[3]['id'];?>.jpg"  >
+                                                <img type="image/webp" src="/template/images/categories/<?php echo $categories[3]['id'];?>.webp"  alt="IMG-BENNER">
+                                            </picture>
 						<div class="block1-wrapbtn w-size2">
 							<!-- Button -->
 							<a href="/category/<?php echo $categories[3]['id'];?>" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
@@ -89,8 +101,11 @@
 				<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
 					<!-- block1 -->
 					<div class="block1 hov-img-zoom pos-relative m-b-30">
-						<img src="/template/images/categories/<?php echo $categories[4]['id'];?>.jpg" alt="IMG-BENNER">
-
+                                            
+                                                 <picture>
+                                                    <source type="image/jpg" srcset="/template/images/categories/<?php echo $categories[4]['id'];?>.jpg"  >
+                                                    <img type="image/webp" src="/template/images/categories/<?php echo $categories[4]['id'];?>.webp"  alt="IMG-BENNER">
+                                                </picture>
 						<div class="block1-wrapbtn w-size2">
 							<!-- Button -->
 							<a href="/category/<?php echo $categories[4]['id'];?>" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
@@ -101,20 +116,21 @@
 
 					<!-- block2 -->
 					<div class="block2 wrap-pic-w pos-relative m-b-30">
-						<img src="/template/images/icons/bg-01.jpg" alt="IMG">
+                                            
+						<img src="/template/images/icons/bg-01.ico" alt="IMG">
 
 						<div class="block2-content sizefull ab-t-l flex-col-c-m">
 							<h4 class="m-text4 t-center w-size3 p-b-8">
-                                                            Sign up &<br> get 10% off
+                                                            Sign up <br> in community
 							</h4>
 
 							<p class="t-center w-size4">
-								Be the frist to know about the latest  news and get exclusive offers
+								We are more than simple online-store, we are community. Become part of us! 
 							</p>
 
 							<div class="w-size2 p-t-25">
 								<!-- Button -->
-								<a href="#" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
+								<a href="/user/registration" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
 									Sign Up
 								</a>
 							</div>
@@ -141,21 +157,26 @@
 					<div class="item-slick2 p-l-15 p-r-15">
 						<!-- Block2 -->
 						<div class="block2">
-                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative ">
-								<img id="prodImg" src="/template/images/products/<?php echo $productsItem['id'];?>/1.jpg" alt="IMG-PRODUCT">
-
+                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative  <?php if($productsItem['sale']==1){echo 'block2-labelsale';}?>">
+								
+                                                                 <picture>
+                                                                    <source type="image/jpg" srcset="/template/images/products/<?php echo $productsItem['id'];?>/1.jpg">
+                                                                    <img type="image/webp" src="/template/images/products/<?php echo $productsItem['id'];?>/1.webp"  alt="IMG-BENNER">
+                                                                </picture>
 								<div class="block2-overlay trans-0-4">
-									<a href="/product/<?php echo $productsItem['id'];?>" class="block2-btn-addwishlist hov-pointer trans-0-4">
-										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-									</a>
+									
 
-									<div class="block2-btn-addcart w-size1 trans-0-4">
-										<!-- Button -->
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Add to Cart
-										</button>
-									</div>
+									 <a class="add-to-cart" href="/cart/add/<?php echo $productsItem['id']['id'];?>" data-id="<?php echo $productsItem['id'];?>"><div class="block2-btn-addcart w-size1 trans-0-4">
+                                                                                        <!-- Button -->
+                                                                                       
+                                                                                        <button  class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                                                             
+                                                                                                Add to Cart
+                                                                                        </button>
+                                                                                </div>
+                                                                                                                                                                    </a>
+
+                                                                                
 								</div>
 							</div>
 
@@ -165,7 +186,8 @@
 								</a>
 
 								<span class="block2-price m-text6 p-r-5">
-									<b><?php echo $productsItem['price'];?></b> $
+									<?php  if(isset($productsItem['sale'])){echo  '<s style="color:red;"><b>'.$productsItem['price'].'</b>$</s> <b>'.$productsItem['new_price'].'</b>$';}
+                                                                            else{echo '<b>'.$productsItem['price'].'</b>$';}?> 
 								</span>
 							</div>
 						</div>
@@ -181,49 +203,40 @@
 	<!-- Banner2 -->
 	<section class="banner2 bg5 p-t-55 p-b-55">
 		<div class="container">
+                   <h3 class="m-text5 t-center m-b-24">
+					HOT SALES
+				</h3>
 			<div class="row">
-				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15 newcomer">
-					<div class="hov-img-zoom pos-relative">
-						<img src="/template/images/products//1.jpg" alt="IMG-BANNER" class="newcomer">
+                           
+                            <div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15  ararat" >
+                                     <a href="/product/<?php echo $sales[0]['prod_id'];?>" class="dis-block s-text10 p-b-5">
+					<div class="bgwhite hov-img-zoom pos-relative p-b-20per-ssm pesgo">
+						
+                                                <picture>
+                                                    <source type="image/jpg" srcset="/template/images/sales/<?php echo $sales[0]['sales_id'];?>.jpg" >
+                                                    <img type="image/webp" src="/template/images/sales/<?php echo $sales[0]['sales_id'];?>.webp"   alt="IMG-BENNER">
+                                                </picture>
 
-                                                <div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15 ">
-							<span class="m-text9 p-t-45 fs-20-sm meetfresh">
-								Meet the newcomer
-							</span>
-
-							<h3 class="l-text1 fs-35-sm meetfresh">
-								
-							</h3>
-
-							<a href="/product/<?php echo $freshOne['id']?>" class="s-text4 hov2 m-t-40 meetfresh">
-								Look now
-							</a>
-						</div>
+						
 					</div>
+                                                                     </a>
+
 				</div>
+                               
+				 <div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15 " >
+                                     <a href="/product/<?php echo $sales[1]['prod_id'];?>" class="dis-block s-text10 p-b-5">
+					<div class="bgwhite hov-img-zoom pos-relative p-b-20per-ssm pesgo">
+					 <picture>
+                                            <source type="image/jpg" srcset="/template/images/sales/<?php echo $sales[1]['sales_id'];?>.jpg" >
+                                            <img type="image/webp" src="/template/images/sales/<?php echo $sales[1]['sales_id'];?>.webp"   alt="IMG-BENNER">
+                                        </picture>
 
-				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
-					<div class="bgwhite hov-img-zoom pos-relative p-b-20per-ssm">
-						<img src="/template/images/shop-item-09.jpg" alt="IMG-BANNER">
-
-						<div class="ab-t-l sizefull flex-col-c-b p-l-15 p-r-15 p-b-20">
-							<div class="t-center">
-								<a href="product-detail.html" class="dis-block s-text3 p-b-5">
-									Gafas sol Hawkers one
-								</a>
-
-								<span class="block2-oldprice m-text7 p-r-5">
-									$29.50
-								</span>
-
-								<span class="block2-newprice m-text8">
-									$15.90
-								</span>
-							</div>
-
-						</div>
+						
 					</div>
+                                                                     </a>
+
 				</div>
+                                
 			</div>
 		</div>
 	</section>
@@ -245,27 +258,27 @@
 					<!-- Block3 -->
                                          
 					<div class="block3">
-						<a href="/blog/<?php echo $articleItem['id'];?>" class="block3-img dis-block hov-img-zoom">
-                                                    <div class="blog_image_main"><img src="/template/images/articles/<?php echo $articleItem['id'];?>/1.jpg" class="blog_image_main_photo" alt="IMG-BLOG"></div>
+						<a href="/article/<?php echo $articleItem['id'];?>" class="block3-img dis-block hov-img-zoom">
+                                                    <div class="blog_image_main m-l-r-auto">
+                                                       
+                                                         <picture class="blog_image_main_photo" >
+                                                            <source type="image/jpg" srcset="/template/images/articles/<?php echo $articleItem['id'];?>.jpg" >
+                                                            <img type="image/webp" src="/template/images/articles/<?php echo $articleItem['id'];?>.webp"    alt="IMG-BENNER">
+                                                        </picture>
+                                                    </div>
+                                                    
 						</a>
 
 						<div class="block3-txt p-t-14">
 							<h4 class="p-b-7">
-								<a href="/blog/<?php echo $articleItem['id'];?>" class="m-text11">
+								<a href="/article/<?php echo $articleItem['id'];?>" class="m-text11">
 									<?php echo $articleItem['title'];?>
 								</a>
 							</h4>
 
-							<span class="s-text6">By</span> <span class="s-text7"><?php echo $authors[$articleItem['author_id']-1]['nickname'];?></span>
-							<span class="s-text6">on</span> <span class="s-text7">
-                                                            <?php
-                                                                        $date = new DateTime($articleItem['date']);
-                                                                        echo $date->format('j M, Y');
-                                                                        ?></span>
+							
 
-							<p class="s-text8 p-t-16">
-								<?php echo mb_strimwidth($articleItem['text'], 0, 300, "...");?>
-							</p>
+
 						</div>
 					</div>
 				</div>
@@ -283,9 +296,9 @@
 			</h3>
 		</div>
 
-		<div class="flex-w">
+		<div class="flex-row sobaka">
 			<?php foreach($instagramPhotos as $insta):?>
-			<div class="block4 wrap-pic-w">
+			<div class="block4 wrap-pic-max-w ">
 				<?php echo $insta['photo'];?>
 
 				<a href="<?php echo $insta['link'];?>" class="block4-overlay sizefull ab-t-l trans-0-4">
@@ -296,7 +309,7 @@
 
 					<div class="block4-overlay-txt trans-0-4 p-l-40 p-r-25 p-b-30">
 						<p class="s-text10 m-b-15 h-size1 of-hidden">
-							<?php echo mb_substr($insta['description'], 0, 170); ?>...
+							<?php echo mb_substr($insta['description'], 0, 120); ?>...
 						</p>
 
 						

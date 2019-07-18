@@ -5,8 +5,9 @@
 	<title>Drone Market</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="/template/images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" href="/template/images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/template/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -46,29 +47,24 @@
 				</div>
 
 				<span class="topbar-child1">
-					Free shipping for standard order over $1500
+                                        Free shipping for standard order over $1500
 				</span>
 
 				<div class="topbar-child2">
 					<span class="topbar-email">
-						<?php echo $contacts['mail']; ?>
+                                         <?php if($username==FALSE){echo $contacts['mail'];}else{echo $username;}?>	
 					</span>
 
-					<div class="topbar-language rs1-select2">
-						<select class="selection-1" name="time">
-							<option>USD</option>
-							<option>EUR</option>
-						</select>
-					</div>
+					
 				</div>
 			</div>
 
 			<div class="wrap_header">
 				<!-- Logo -->
 				<a href="/" class="logo">
-					<img src="/template/images/icons/logo.png" alt="IMG-LOGO">
+					<img src="/template/images/icons/logo.ico" alt="IMG-LOGO">
 				</a>
-
+                      
 				<!-- Menu -->
 				<div class="wrap_menu">
 					<nav class="menu">
@@ -79,7 +75,7 @@
 							</li>
 
 							<li>
-                                                            <a class="shop_item" href="/shop/">Shop</a>
+                                                            <a class="shop_item" href="/category/all/">Shop</a>
                                                                 <ul class="sub_menu">
                                                                     <?php foreach ($categories as $categoryItem):?>
 									<li><a href="/category/<?php echo $categoryItem['id'];?>"> <?php echo $categoryItem['name'];?></a></li>
@@ -91,7 +87,7 @@
 							
 
 							<li>
-								<a href="/blog/">Blog</a>
+								<a href="/blog/all">Blog</a>
                                                                 <ul class="sub_menu">
                                                                     <?php foreach ($blogCategories as $blogCategoryItem):?>
 									<li><a href="/blog/<?php echo $blogCategoryItem['id'];?>"> <?php echo $blogCategoryItem['name'];?></a></li>
@@ -101,11 +97,11 @@
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="/about">About</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="/contact">Contact</a>
 							</li>
 						</ul>
 					</nav>
@@ -115,24 +111,30 @@
 				<div class="header-icons">
                                     <?php if(User::isGuest()):?>
                                     <a href="/user/login" class="header-wrapicon1 dis-block">
-                                            <img src="/template/images/icons/login.png" class="header-icon1" alt="ICON">
+                                            <img src="/template/images/icons/login.ico" class="header-icon1" alt="ICON">
 					</a>
                                     <span class="linedivide1"></span>
                                     <?php else:?>
-					<a href="/profile/" class="header-wrapicon1 dis-block">
-						<img src="/template/images/icons/profile.png" class="header-icon1" alt="ICON">
+                                        <?php if(User::isAdmin()):?>
+                                        <a href="/configurations/" class="header-wrapicon1 dis-block">
+                                            <img src="/template/images/icons/settings.ico" class="header-icon1" alt="ICON">
 					</a>
-                                    <span class="linedivide1"></span>
+                                        <span class="linedivide1"></span>
+                                        <?php else:?>
+					<a href="/profile/" class="header-wrapicon1 dis-block">
+						<img src="/template/images/icons/profile.ico" class="header-icon1" alt="ICON">
+					</a>
+                                        <span class="linedivide1"></span>
                                     
-                                        
+                                        <?php endif;?>
                                         <a href="/user/logout" class="header-wrapicon1 dis-block">
-						<img src="/template/images/icons/logout.png" class="header-icon1" alt="ICON">
+						<img src="/template/images/icons/logout.ico" class="header-icon1" alt="ICON">
 					</a>
 
 					<span class="linedivide1"></span>
                                         <?php endif;?>
 					<div class="header-wrapicon2">
-						<img src="/template/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                                            <img src="/template/images/icons/icon-header-02.ico" class="header-icon1 js-show-header-dropdown" alt="ICON">
                                                 <span id="cart-count" class="header-icons-noti"></span>
 
 						<!-- Header cart noti -->
@@ -140,12 +142,12 @@
                                                     <ul  id="addul" class="header-cart-wrapitem">
 								<?php foreach($productsCart as $productsCartItem):?>
                                                                  <li  class="header-cart-item">
-                                                                      
+                                                                        <a  class="delete-from-cart" href="" data-id="<?php echo $productsCartItem['id'];?>">
 									<div class="header-cart-item-img">
                                                                            
-										<img src="/template/images/products/<?php echo $productsCartItem['id'];?>/1.jpg" alt="IMG">
+                                                                           <img src="/template/images/products/<?php echo $productsCartItem['id'];?>/1.webp" alt="IMG">
 									</div>
-                                                                 
+                                                                        </a>
 									<div class="header-cart-item-txt">
 										<a href="/product/<?php echo $productsCartItem['id'];?>" class="header-cart-item-name">
 										 
@@ -168,17 +170,12 @@
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="/bigcart" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>
 
-								<div class="header-cart-wrapbtn">
-									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										Check Out
-									</a>
-								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -190,27 +187,50 @@
 		<div class="wrap_header_mobile">
 			<!-- Logo moblie -->
 			<a href="/" class="logo-mobile">
-				<img src="/template/images/icons/logo.png" alt="IMG-LOGO">
+				<img src="/template/images/icons/logo.ico" alt="IMG-LOGO">
 			</a>
 
 			<!-- Button show menu -->
-			<div class="btn-show-menu">
+			<div class="btn-show-menu ">
 				<!-- Header Icon mobile -->
 				<div class="header-icons-mobile">
-					<a href="#" class="header-wrapicon1 dis-block">
-						<img src="/template/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+					 <?php if(User::isGuest()):?>
+                                    <a href="/user/login" class="header-wrapicon1 dis-block">
+                                            <img src="/template/images/icons/login.ico" class="header-icon1" alt="ICON">
+					</a>
+                                    <span class="linedivide1"></span>
+                                    <?php else:?>
+                                        <?php if(User::isAdmin()):?>
+                                        <a href="/configurations/" class="header-wrapicon1 dis-block">
+                                            <img src="/template/images/icons/settings.ico" class="header-icon1" alt="ICON">
+					</a>
+                                        <span class="linedivide1"></span>
+                                        <?php else:?>
+					<a href="/profile/" class="header-wrapicon1 dis-block">
+						<img src="/template/images/icons/profile.ico" class="header-icon1" alt="ICON">
+					</a>
+                                        <span class="linedivide1"></span>
+                                    
+                                        <?php endif;?>
+                                        <a href="/user/logout" class="header-wrapicon1 dis-block">
+						<img src="/template/images/icons/logout.ico" class="header-icon1" alt="ICON">
 					</a>
 
-					<span class="linedivide2"></span>
+					<span class="linedivide1"></span>
+                                        <?php endif;?>
+					
+
 
 					<div   class="header-wrapicon2">
-						<img src="/template/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                                            <a href="/bigcart">
+						<img src="/template/images/icons/icon-header-02.ico" class="header-icon1 js-show-header-dropdown" alt="ICON">
                                                 <span id="cart-count" class="header-icons-noti"></span>
+                                            </a>
 
 						
 					</div>
 				</div>
-
+<span class="linedivide1"></span>
 				<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
 					<span class="hamburger-box">
 						<span class="hamburger-inner"></span>
@@ -232,15 +252,10 @@
 					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
 						<div class="topbar-child2-mobile">
 							<span class="topbar-email">
-								<?php echo $contacts['mail']; ?>
+								    <?php if($username==FALSE){echo $contacts['mail'];}else{echo $username;}?>	
 							</span>
 
-							<div class="topbar-language rs1-select2">
-								<select class="selection-1" name="time">
-									<option>USD</option>
-									<option>EUR</option>
-								</select>
-							</div>
+						
 						</div>
 					</li>
 
@@ -253,11 +268,11 @@
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="index.html">Home</a>
+						<a href="/">Home</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="/shop/">Shop</a>
+						<a href="/category/all">Shop</a>
                                                 <ul class="sub-menu">
 							<?php foreach ($categories as $categoryItem):?>
                                                             <li><a href="/category/<?php echo $categoryItem['id'];?>"> <?php echo $categoryItem['name'];?></a></li>
@@ -269,7 +284,7 @@
 					
 
 					<li class="item-menu-mobile">
-						<a href="blog/">Blog</a>
+						<a href="/blog/all">Blog</a>
                                                 <ul class="sub-menu">
                                                     <?php foreach ($blogCategories as $blogCategoryItem):?>
                                                         <li><a href="/blog/<?php echo $blogCategoryItem['id'];?>"> <?php echo $blogCategoryItem['name'];?></a></li>
@@ -280,11 +295,11 @@
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="about.html">About</a>
+						<a href="/about">About</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="contact.html">Contact</a>
+						<a href="/contact">Contact</a>
 					</li>
 				</ul>
 			</nav>

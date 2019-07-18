@@ -6,12 +6,12 @@
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
 
-		<a href="/category/<?php echo $product['name']; ?>" class="s-text16">
+		<a href="/category/<?php echo $product['category_id']; ?>" class="s-text16">
 			<?php echo $categories[$product['category_id']-1]['name']; ?>
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
 
-		<a href="#" class="s-text16">
+		<a  class="s-text16">
 			<?php echo $product['firm']; ?>
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
@@ -56,7 +56,10 @@
 				</h4>
 
 				<span class="m-text17 ">
-                                    <b><?php echo $product['price']; ?></b> $
+                                
+                                      <?php  if(isset($product['sale'])){echo  '<s style="color:red;"><b>'.$product['price'].'</b>$</s> <b>'.$product['new_price'].'</b>$';}
+                                                                            else{echo '<b>'.$product['price'].'</b>$';}
+                                                                            ?>
 				</span>
 
 				
@@ -65,29 +68,22 @@
 				<div class="p-t-33 p-b-60">
 				
 					
-
+                                    <?php if($product['in_stock']==1){  ?>
 					<div class="flex-l-m flex-w p-t-10">
 						<div class="w-size16 flex-m flex-w">
-							<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
-								<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-									<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-								</button>
-
-								<input class="size8 m-text18 t-center num-product" type="number" name="num-product" value="1">
-
-								<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-									<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-								</button>
-							</div>
+							
 
 							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
-								<!-- Button -->
+								<a class="add-to-cart" href="/cart/add/<?php echo $product['id'];?>" data-id="<?php echo $product['id'];?>">
 								<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
 									Add to Cart
 								</button>
+                                                                </a>
 							</div>
 						</div>
 					</div>
+                                    <?php }else{echo 'Sorry, this product isn\'t avaliable now(';} ?>
+                                    
 				</div>
 
 				<div class="p-b-45">
@@ -109,9 +105,9 @@
                             $speedPercent=round(($product['speed']*10),0);
                             $qualityPercent=round(($product['quality']*10),0);
                                             echo '
-                        <div class="flex-w flex-sb">
-                            <div class="w-size13 flex-m flex-w p-b-60">
-                                <div class="w-size9 flex-m flex-w m-r-100">
+                        <div class="flex-w flex-sb m-t-50">
+                            <div class="w-size13 flex-m flex-w p-b-60 m-l-r-auto lolo">
+                                <div class="w-size9 flex-m flex-w m-l-r-auto">
                                     <section >
               
                                         <svg class="circle-chart" viewbox="0 0 33.83098862 33.83098862" width="220" height="220" xmlns="http://www.w3.org/2000/svg">
@@ -126,7 +122,7 @@
                                         </svg>
                                     </section>
                                 </div>
-                                <div class="w-size9 flex-m flex-w ">
+                                <div class="w-size9 flex-m flex-w lolo">
                                     <section >
                                        
                                        <svg class="circle-chart" viewbox="0 0 33.83098862 33.83098862" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
@@ -208,7 +204,7 @@
                                 <div class="specs">
                                     <img src="/template/images/icons/slow-mo.png" class="productSpecsLogo">
                                     <span  class="m-l-10">Slow-mo resolution<br>
-                                     <b>'; echo $product['slow-mo_resolution']; echo '</b></span>
+                                     <b>'; echo $product['slow_resolution']; echo '</b></span>
                                 </div>
                                 <div class="specs">
                                     <img src="/template/images/icons/rotate.png" class="productSpecsLogo">
@@ -272,15 +268,53 @@
 
 				<div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
 					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text25 color0-hov trans-0-4">
-						Comments (0)
+						Comments 
 						<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
 						<i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
 					</h5>
 
 					<div class="dropdown-content dis-none p-t-15 p-b-23">
-						<p class="s-text8">
-							Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
-						</p>
+                                                  
+                                            <?php foreach($commentsInfo as $value):?>
+                                            <div class="comment_wrapper m-b-20">
+                                                <span class="comment_info m-l-8"><?php if(isset($_SESSION['user']) && $value['author_id']==$_SESSION['user']){
+                                                    echo '<form method="post"><input class="delete_comment" type="submit" name="delete_comment" value="Delete comment"><input type="hidden" name="id" value="'.$value['id'].'"></form>';
+                                                    
+                                                }?></span>
+                                                <span class="comment_title"><?php echo $value['title'];?></span>
+                                                <p class="comment_text"><?php echo $value['text'];?></p>
+                                                <div class=" comment_info">
+                                                <span class="comment_date"><?php echo $value['date'];?></span>
+                                                 <span class="comment_author m-l-8">by <?php echo $authors[$value['author_id']];?></span>
+                                                </div>
+                                            </div>
+                                            <?php endforeach;?>
+                                             <?php if($username!=NULL): ?>
+						<!-- Leave a comment -->
+                                                <form method="post" >
+							<h4 class="m-text25 p-b-14">
+								Leave a Comment
+							</h4>
+
+							<div class="bo12 of-hidden   m-b-20 w-full">
+								<input class="sizefull s-text7 p-b-18 p-t-18 p-l-18 p-r-18" type="text" name="comment_title" placeholder="Title">
+							</div>
+
+							<textarea class="dis-block s-text7 size18 bo12 p-l-18 p-r-18 p-t-13 m-b-20" name="comment_text" placeholder="Comment..."></textarea>
+
+							
+
+						
+
+							<div class="w-size24">
+								<!-- Button -->
+                                                                <input type="submit" name="submit_comment" value="Post Comment" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									
+							</div>
+						</form>
+                                                <?php else:?>
+                                                <a  href="/user/login"><b>LOGIN</b></a> for leave your comment.
+                                                <?php endif;?>
 					</div>
 				</div>
 	</div>

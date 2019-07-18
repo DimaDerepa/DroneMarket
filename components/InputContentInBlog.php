@@ -2,8 +2,9 @@
 
 
 class InputContentInBlog {
-    private static function replacementTagsIntoContent($text, $pattern, $substitute){
-        $string = $article['text'];
+     public static function replacer($text,$idArticle){
+
+        $string=$text;
         $finded= preg_match_all("/!!product ([1-9]+)!!/", $string , $out);
         $id=array();
         $correctOut=array();  
@@ -27,8 +28,12 @@ class InputContentInBlog {
         }
         $replacementS=array();
         foreach ($number as $numItem){
-            $replacementS[]='<img src="/template/images/articles/'.$article['id'].'/'.($numItem+1).'.jpg" id="blog_additional_photo">';
+            $replacementS[]='<img src="/template/images/articles/'.$idArticle.'/'.($numItem+1).'.jpg" id="blog_additional_photo">';
         }
-             echo preg_replace($correctOutSecond, $replacementS, $string);
+        $string=preg_replace($correctOutSecond, $replacementS, $string);
+        
+        return $string;
+            
     }
+    
 }

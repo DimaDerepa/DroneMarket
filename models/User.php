@@ -1,5 +1,21 @@
 <?php
 class User {
+    public static function isAdmin(){
+        if(isset($_SESSION['user'])){
+            if($_SESSION['user']==1){
+            return TRUE;
+            }
+        }
+        return FALSE; 
+    }
+    public static function checkAdmin(){
+        if(isset($_SESSION['user'])){
+            if($_SESSION['user']==1){
+            return TRUE;
+            }
+        }
+        header("Location: /");
+    }
     public static function isGuest(){
         if(isset($_SESSION['user'])){
             return FALSE;
@@ -103,5 +119,27 @@ class User {
         }
         header("Location: /");
     }
-    
+      public static function getUserName(){
+
+        if(isset($_SESSION['user'])){
+            $db=Db::getConnection();
+            $query='SELECT nickname FROM users WHERE id= :id';
+            $result=$db->prepare($query);
+            $result->bindParam(':id', $_SESSION['user'], PDO::PARAM_STR);
+            $result->execute();
+            $username=$result->fetch();
+            return $username['nickname'];
+        }
+        return FALSE;
+    }
+      public static function SaveEmail(){
+          if (isset($_POST['Subscribe'])) {
+                $db=Db::getConnection();
+            $query='INSERT INTO subscribers(email) VALUES (:email)';
+            $result=$db->prepare($query);
+            $result->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
+            $result->execute();
+          }
+
+    }
 }
