@@ -27,6 +27,43 @@ class Cart {
 
         return self::CartCount();
     }
+    public static function deleteFromCart(){
+        if(isset($_POST['delete_from_cart'])){
+            $id=$_POST['deleted_id'];
+            unset($_SESSION['products'][$id]);
+
+        return true;
+        }
+        return FALSE;
+    }
+        public static function createOrder(){
+        if(isset($_POST['create_order'])){
+             $db= Db::getConnection();
+            $list=$_POST['list'];
+            $phone=$_POST['phone'];
+            $name=$_POST['name'];
+          $query="INSERT INTO orderlist(list,name,phone) VALUES (:list, :name, :phone)";
+           
+        $result=$db->prepare($query);
+        $result->bindValue(':list', $list);
+        $result->bindValue(':name', $name);
+        $result->bindValue(':phone', $phone);
+        $result->execute();
+        unset($_SESSION['products']);
+
+        return true;
+        }
+        return FALSE;
+    }
+    public static function clearCart(){
+        if(isset($_POST['clear_cart'])){
+            
+            unset($_SESSION['products']);
+
+        return true;
+        }
+        return FALSE;
+    }
 
     public static function CartCount() {
         if(isset($_SESSION['products'])){
@@ -42,7 +79,23 @@ class Cart {
 
 public static function ProductsinCart() {
     if (isset($_SESSION['products'])){
-         $db = Db::getConnection();
+        $today = date('Y-m-d');
+         $salesList=array();
+         $db= Db::getConnection();
+        $bazar=$db->query('SELECT * FROM sales WHERE date_stop>'.$today);
+        $j=0;
+        while($row=$bazar->fetch()){
+            $salesList[$j]['product_id']=$row['product_id'];
+            $salesList[$j]['new_price']=$row['new_price'];
+            $salesList[$j]['date_stop']=$row['date_stop'];
+            $j++;
+        }
+           $saleItem=array();
+        foreach ($salesList as $value){
+ 
+            $saleItem[$value['product_id']]=array("new_price"=>$value['new_price'],"date_stop"=>$value['date_stop']);
+            
+        }
 
          $productsCart=$_SESSION['products'];
          $i=0;
@@ -58,7 +111,13 @@ public static function ProductsinCart() {
             $cartItems[$i]['price']=$row['price'];
             $cartItems[$i]['total']=intval($row['price'])*intval($value);
             $totalPrice=+$cartItems[$i]['total'];
-           
+            if(array_key_exists($cartItems[$i]['id'],$saleItem)){
+                $cartItems[$i]['new_price']=$saleItem[$cartItems[$i]['id']]['new_price'];
+                $cartItems[$i]['date_stop']=$saleItem[$cartItems[$i]['id']]['date_stop'];
+                $cartItems[$i]['sale']=1;
+                $cartItems[$i]['total']=0;
+                $cartItems[$i]['total']=intval($saleItem[$cartItems[$i]['id']]['new_price'])*intval($value);
+            }
              $i++;
              }
           
@@ -98,10 +157,10 @@ public static function total() {
               
          }
         
-         
+       return $totalPrice;
    
 }
  
-return $totalPrice ;
+return FALSE;
 }
 }
